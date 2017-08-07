@@ -11,6 +11,7 @@
   "dependencies": {
     "next": "^3.0.1-beta.21",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "semantic-ui-react": "^0.71.3"
   }
 }
