@@ -13,6 +13,9 @@ import {
   Segment,
   Visibility
 } from "semantic-ui-react";
+import { initStore } from "../src/store";
+import withRedux from "next-redux-wrapper";
+import Actions from "../src/actions";
 
 const FixedMenu = () => (
   <Menu fixed="top" size="large">
@@ -33,7 +36,7 @@ const FixedMenu = () => (
   </Menu>
 );
 
-export default () => (
+const App = props => (
   <div>
     <Head>
       <title>Initial</title>
@@ -86,7 +89,8 @@ export default () => (
           <h1>
             <Link href="/post">Go to Post</Link>
           </h1>
-
+          <button onClick={() => props.addCount()}>Add</button>
+          <h1> {props.count}</h1>
         </Container>
       </Segment>
     </Visibility>
@@ -204,3 +208,17 @@ export default () => (
     </Segment>
   </div>
 );
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addCount: () => dispatch(Actions.addCount())
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    count: state.count
+  };
+};
+
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(App);
